@@ -66,10 +66,10 @@ app.post("/login", async (req, res) => {
   }
 });
 
-//homepage after login and validate token(middleware)
-app.get('/home',verifyToken,(req,res)=>{
+//profilepage after login and validate token(middleware)
+app.get('/profile',verifyToken,(req,res)=>{
 
-    res.send(`Welcome ${req.user.username} to Home Page`)
+    res.send(`${req.user.username}. Welcome to the Profile Page`)
 
 })
 

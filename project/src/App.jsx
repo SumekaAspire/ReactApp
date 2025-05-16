@@ -1,34 +1,4 @@
-// import { useState } from 'react'
-
-// import { Link } from 'react-router-dom';
-
-// function App() {
-//   const [count, setCount] = useState(0)
-
-//   return (
-//     <>
-//
-//       {/* <div className="card">
-//         <button onClick={() => setCount((count) => count + 1)}>
-//           count is {count}
-//         </button>
-
-//       </div> */}
-//       <div style={{ padding: '20px', fontFamily: 'Arial', textAlign: 'center' }}>
-//       <h1>Home Page</h1>
-//       <p>Welcome to the home page.</p>
-//       <Link to="" style={{ color: '#007bff', textDecoration: 'none', fontWeight: 'bold' }}>
-//         Go to About Page
-//       </Link>
-//     </div>
-
-//     </>
-//   )
-// }
-
-// export default App
-
-import React from "react";
+import React,{useContext}from "react";
 import reactLogo from "./assets/react.svg";
 import "./App.css";
 import {
@@ -38,7 +8,12 @@ import {
   Link,
   useNavigate,
 } from "react-router-dom";
+
 import HomePage from "./components/HomePage";
+import SignUp from "./pages/SignUp";
+import Login from "./pages/Login";
+import Profile from "./pages/Profile"
+import { AuthContext } from "./context/AuthContext";
 
 function Home() {
   const navigate = useNavigate();
@@ -79,16 +54,19 @@ function Home() {
   );
 }
 function App() {
+const {user} = useContext(AuthContext);
+  
   return (
     <Router>
       <div>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/components/HomePage" element={<HomePage />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/SignUp" element={<SignUp />} />
+          <Route path="/Profile" element={user?<Profile />:<Login/>} />
 
-          
         </Routes>
-        
       </div>
     </Router>
   );
