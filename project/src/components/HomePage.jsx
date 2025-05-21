@@ -26,12 +26,13 @@ function HomePage() {
       }}
     >
       <div style={contentStyle}>
-        <h2>HomePage</h2>
+        <h2>WEBSITE !!</h2>
       </div>
-      <div className="marquee">
+      {/* <div className="marquee">
         <div className="marquee-content">
           Sample project is created using React and Node.js!
         </div>
+        </div> */}
 
 <div style={buttonContainerStyle}>
 <button
@@ -49,7 +50,6 @@ function HomePage() {
 </div>
        
       </div>
-    </div>
   );
 }
 
@@ -74,9 +74,12 @@ const buttonContainerStyle = {
 const contentStyle = {
   textAlign: "center" ,
   position: "absolute",
-  top: "7%",
+  top: "40%",
   left: "50%",
   transform: "translate(-50%, -50%)",
+  fontSize: "40px",
+  fontWeight: "italic",
+
 };
 
 

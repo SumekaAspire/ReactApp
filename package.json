@@ -1,6 +1,12 @@
 {
   "dependencies": {
     "backend": "^0.0.0",
+    "chai": "^5.2.0",
+    "mocha": "^11.4.0",
     "react-router-dom": "^7.6.0"
+  },
+  "type": "module",
+  "scripts": {
+    "test": "mocha Testing"
   }
 }
