@@ -1,10 +1,11 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import axios from 'axios';
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const SignUp = () => {
-  const navigate =useNavigate();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -14,17 +15,26 @@ const SignUp = () => {
 
   const onSubmit = (data) => {
     // alert(`Username: ${data.username}\nPassword: ${data.password}`);
-console.log(data.username+ " "+data.password)
-    axios.post("http://localhost:3001/signup",{
-      username: data.username,password: data.password
-    })
-    .then(res =>{
-      alert("Sign up Success: "+res.data);
-      navigate('/Login')
-    }).catch(err => {
-      console.error("Signup error:", err);
-    });
+    console.log(data.username + " " + data.password);
+    axios
+      .post("http://localhost:3001/signup", {
+        username: data.username,
+        password: data.password,
+      })
+      .then((res) => {
+        // toast.success("Sign up Success: " + res.data);
+        toast.success("Sign up successful! " + res.data);
 
+        setTimeout(() => {
+          navigate("/Login");
+        }, 2000);
+
+        reset();
+      })
+      .catch((err) => {
+        console.error("Signup error:", err);
+        toast.error("Signup failed. Please try again.");
+      });
 
     reset();
   };
@@ -56,11 +66,11 @@ console.log(data.username+ " "+data.password)
             required: "Username is required!",
             minLength: {
               value: 3,
-              message: 'Name must be at least 3 characters',
+              message: "Name must be at least 3 characters",
             },
             maxLength: {
               value: 20,
-              message: 'Name cannot exceed 20 characters',
+              message: "Name cannot exceed 20 characters",
             },
           })}
           style={inputStyle}
@@ -76,8 +86,7 @@ console.log(data.username+ " "+data.password)
           {...register("password", {
             required: "Password is required!",
             validate: (value) =>
-              value.includes("@") ||
-              "Password must include-character '@'",
+              value.includes("@") || "Password must include-character '@'",
           })}
           style={inputStyle}
         />
@@ -94,6 +103,7 @@ console.log(data.username+ " "+data.password)
           Register
         </button>
       </form>
+      <ToastContainer position="top-center" autoClose={3000} />
     </div>
   );
 };
@@ -124,7 +134,7 @@ const errorStyle = {
   color: "red",
   fontSize: "14px",
   marginTop: "-10px",
-  textAlign:"left"
+  textAlign: "left",
 };
 
 export default SignUp;

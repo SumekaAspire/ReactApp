@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import {AuthContext} from '../context/AuthContext';
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
 const {dispatch} = useContext(AuthContext);
@@ -15,7 +17,7 @@ const navigate = useNavigate();
   } = useForm();
 
   const onSubmit = async(data) => {
-    alert(`Username: ${data.username}\nPassword: ${data.password}`);
+   // toast.info(`Username: ${data.username}\nPassword: ${data.password}`);
     console.log(data.username + " " + data.password);
 try{
   const response = await axios.post("http://localhost:3001/login",{
@@ -32,9 +34,9 @@ try{
   navigate('/Profile')
 }catch (error) {
     if (error.response && error.response.status === 400) {
-      alert("Invalid username or password");
+      toast.error("Invalid username or password");
     } else {
-      alert("Something went wrong. Please try again later.");
+      toast.error("Something went wrong. Please try again later.");
     }
     console.error("Login error:", error);
   }
@@ -88,6 +90,8 @@ try{
           Login
         </button>
       </form>
+            <ToastContainer position="top-center" autoClose={3000} />
+
     </div>
   );
 };
